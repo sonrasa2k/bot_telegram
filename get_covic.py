@@ -96,6 +96,6 @@ class Covic:
             return {"code":0 , "msg": "error"}
 if __name__ == '__main__':
     c = Covic()
-    print(c.covic_diaphuong("đồng nai"))
+    print(c.covic_diaphuong("đ"))
 
 
