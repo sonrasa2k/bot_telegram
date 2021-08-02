@@ -35,18 +35,18 @@ def tin_ca_nhiem_moi(update,context):
 def play_music(update, context):
     name = update.message.from_user.id
     text = update.message.text
-    if '/m' in text:
-        text = text.split('/m ')[1]
-        api_zing= "http://ac.mp3.zing.vn/complete?type=artist,song,key,code&num=15&query={0}".format(text)
+    if '/p' in text:
+        text = text.split('/p ')[1]
+        api_zing = "http://ac.mp3.zing.vn/complete?type=artist,song,key,code&num=15&query={0}".format(text)
         data = requests.get(api_zing).json()
         list_data = data["data"][0]['song']
         link_api_music = "http://api.mp3.zing.vn/api/streaming/audio/"
         list_link_music = []
         for data in list_data:
-            list_link_music.append(link_api_music+str(data['id'])+'/320')
+            list_link_music.append(link_api_music + str(data['id']) + '/320')
         text = ""
-        for i in range(1,len(list_link_music)+1):
-            text = text+str(i)+". "+list_link_music[i-1]+"\n"
+        for i in range(1, len(list_link_music) + 1):
+            text = text + str(i) + ". " + list_link_music[i - 1] + "\n"
         context.bot.send_message(chat_id=update.effective_chat.id, text=text)
     elif '/covic' in text:
         text = text.split('/covic ')[1]
@@ -56,9 +56,10 @@ def play_music(update, context):
                 context.bot.send_message(chat_id=update.effective_chat.id, text="Hệ thống đang bị lỗi rồi bạn yêu ♥")
             elif data['code'] == 99:
                 text = "Tên Tỉnh |Tổng |Hôm Nay | CHẾT\n"
-                for i in range(0,len(data['name_tinh'])):
-                    text = text + "{0} | {1} | {2} | {3}\n".format(data['name_tinh'][i],data['scn'][i],data['scnhn'][i],data['chet'][i])
-                context.bot.send_message(chat_id=update.effective_chat.id,text=text)
+                for i in range(0, len(data['name_tinh'])):
+                    text = text + "{0} | {1} | {2} | {3}\n".format(data['name_tinh'][i], data['scn'][i],
+                                                                   data['scnhn'][i], data['chet'][i])
+                context.bot.send_message(chat_id=update.effective_chat.id, text=text)
         else:
             print(text)
             data = covic.covic_diaphuong(text)
@@ -66,8 +67,9 @@ def play_music(update, context):
             if data['code'] == 0:
                 context.bot.send_message(chat_id=update.effective_chat.id, text="Hệ thống đang bị lỗi rồi bạn yêu ♥")
             elif data['code'] == 200:
-                text = "Thông tinh về Covic Tại {0}:\nTổng Số Ca Nhiễm: {1}\nSố Ca Nhiễm Hôm Nay: {2}\nSố Người Chết: {3}".format(data['name_tinh'],data['scn'],data['scnhn'],data['chet'])
-                context.bot.send_message(chat_id=update.effective_chat.id,text=text)
+                text = "Thông tinh về Covic Tại {0}:\nTổng Số Ca Nhiễm: {1}\nSố Ca Nhiễm Hôm Nay: {2}\nSố Người Chết: {3}".format(
+                    data['name_tinh'], data['scn'], data['scnhn'], data['chet'])
+                context.bot.send_message(chat_id=update.effective_chat.id, text=text)
             else:
                 context.bot.send_message(chat_id=update.effective_chat.id, text="Tên tĩnh sai rồi bạn yêu ♥")
     elif "/tiktok username" in text:
