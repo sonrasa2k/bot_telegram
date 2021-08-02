@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="+84764018693" uuid="5cddf7d1-6ff4-4d7e-b7e3-f853dd5f3260">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\sonng\bot_telegram\+84764018693.session</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="+84782979144" uuid="44a69f39-bc29-4bee-8062-1accb2fb2608">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\sonng\bot_telegram\+84782979144.session</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="+84784906948" uuid="2f3f3a6a-26eb-4e8d-b917-b53d83cced81">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\sonng\bot_telegram\+84784906948.session</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="+84786560844" uuid="2ec5ea14-112b-405b-bdfc-489f32ed04cb">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\sonng\bot_telegram\+84786560844.session</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="+84877507820" uuid="d8d75a2c-f4b8-4226-9ca9-f180a4d71777">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\sonng\bot_telegram\+84877507820.session</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="+84947425294" uuid="926ea5c7-178c-456d-be78-58cb9b779ee2">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\sonng\bot_telegram\+84947425294.session</jdbc-url>
+    </data-source>
+  </component>
+</project>
