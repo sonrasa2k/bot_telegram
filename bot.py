@@ -120,7 +120,7 @@ def play_music(update, context):
             context.bot.sendVideo(chat_id=update.effective_chat.id,video=url_video,caption=caption)
     elif "/coin" in text:
         text = text.split('/coin ')[1]
-        if text =="all":
+        if text == "all":
             text_return = coin.get_all()
             context.bot.send_message(chat_id=update.effective_chat.id, text=text_return)
         else:
