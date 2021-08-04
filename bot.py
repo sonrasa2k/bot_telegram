@@ -3,8 +3,11 @@ from get_covic import Covic
 import requests
 from tiktok import Download
 from random import randrange
+from get_coin import Get_Coin
+
 tiktoks = Download()
 covic = Covic()
+coin = Get_Coin
 updater = Updater(token='1947192196:AAFEPEaVg9RnJP0ELjbTZUujN3rGkYUHLQA', use_context=True) #Replace TOKEN with your token string
 dispatcher = updater.dispatcher
 def help(update,context):
@@ -15,7 +18,9 @@ def help(update,context):
                                   "Để xem thông tin về các ca nhiễm covic tại việc nam bạn hãy nhập: /covic_new\n"
                                   "Để xem thông tin Covic tất cả tỉnh thành có covic hãy nhập: /covic all \n"
                                   "Để xem thông tin Covic từng tỉnh thành hãy nhập: /covic tên tỉnh thành viết thường có dấu\n"
-                                  "Để nghe và tải nhạc hãy nhập : /p tên bài hát")
+                                  "Để nghe và tải nhạc hãy nhập : /p tên bài hát\n"
+                                  "Để lấy danh sách video của 1 user tiktok bạn hãy nhập: /titok usernaname <tên username>\n. VD: /tiktok username h2son\n"
+                                  "Để phát 1 video từ danh sách video hãy nhập /v <số thứ tự trong list video tiktok>. Ví dụ: /v 1")
     context.bot.send_message(chat_id=update.message.chat_id,
                              text="")
 def hello(update, context):
@@ -113,6 +118,14 @@ def play_music(update, context):
                 data[stt].strip().split('||')[0],data[stt].strip().split('||')[1],data[stt].strip().split('||')[3],data[stt].strip().split('||')[2]
             )
             context.bot.sendVideo(chat_id=update.effective_chat.id,video=url_video,caption=caption)
+    elif "/coin" in text:
+        text = text.split('/coin ')[1]
+        if text =="all":
+            text_return = coin.get_all()
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text_return)
+        else:
+            text_return = coin.get_by_name(text)
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text_return)
         # try:
         #     list_id = tiktoks.get_all_id_video__of_user(text)
         #     if len(list_id) == 0:
