@@ -2,25 +2,7 @@ import requests
 class Get_Coin:
     def __init__(self):
         self.coin = 0
-    def get_all(self):
-        api_url = 'http://api.coincap.io/v2/assets'
-        data = requests.get(api_url).json()['data']
-        list_name = []
-        list_gia = []
-        list_gia_thap = []
-        list_chenh_lech_gia = []
-        for i in data:
-            list_name.append(i['name'])
-            list_gia.append(i['priceUsd'])
-            list_gia_thap.append(i['vwap24Hr'])
-            list_chenh_lech_gia.append(i['changePercent24Hr'])
-        text = "Giá Thị Trường Tiền Điện Tử Hiện Tại:\n" \
-               "Rank| Tên | Giá Hiện Tại | Thấp Nhất 24 | Tỷ lệ chênh lệch\n"
-        for i in range(0,len(list_name)):
-            text = text + str(i+1)+" | {0} | {1} | {2} | {3}\n".format(list_name[i],round(float(list_gia[i]),2),round(float(list_gia_thap[i]),2),round(float(list_chenh_lech_gia[i]),2))
-        return text
-    def get_by_name(self,name):
-        headers = {
+        self.headers = {
             'authority': 'api.coincap.io',
             'cache-control': 'max-age=0',
             'sec-ch-ua': '^\\^Chromium^\\^;v=^\\^92^\\^, ^\\^',
@@ -36,8 +18,27 @@ class Get_Coin:
             'cookie': '_uetvid=6c0eefe0ed7311eb92674f6fdd3e98a3; _ga=GA1.1.330530233.1627236556; _ga_MF6R5QRX6K=GS1.1.1627245117.2.0.1627245117.0',
             'if-none-match': 'W/^\\^97fd-ozOCjGsQgQ3ALxdkXzeh3gjy7ak^\\^',
         }
+    def get_all(self):
         api_url = 'http://api.coincap.io/v2/assets'
-        data = requests.get(api_url,headers=headers).json()['data']
+        data = requests.get(api_url,self.headers).json()['data']
+        list_name = []
+        list_gia = []
+        list_gia_thap = []
+        list_chenh_lech_gia = []
+        for i in data:
+            list_name.append(i['name'])
+            list_gia.append(i['priceUsd'])
+            list_gia_thap.append(i['vwap24Hr'])
+            list_chenh_lech_gia.append(i['changePercent24Hr'])
+        text = "Giá Thị Trường Tiền Điện Tử Hiện Tại:\n" \
+               "Rank| Tên | Giá Hiện Tại | Thấp Nhất 24 | Tỷ lệ chênh lệch\n"
+        for i in range(0,len(list_name)):
+            text = text + str(i+1)+" | {0} | {1} | {2} | {3}\n".format(list_name[i],round(float(list_gia[i]),2),round(float(list_gia_thap[i]),2),round(float(list_chenh_lech_gia[i]),2))
+        return text
+    def get_by_name(self,name):
+
+        api_url = 'http://api.coincap.io/v2/assets'
+        data = requests.get(api_url,headers=self.headers).json()['data']
         for i in data:
             if name in i['id'] or name in i['name'] or name in i['symbol']:
                text = "Giá Thị Trường Đồng {0} Hiện Tại: \n" \
