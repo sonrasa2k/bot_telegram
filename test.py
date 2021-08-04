@@ -18,4 +18,4 @@ headers = {
 }
 
 response = requests.get('https://api.coincap.io/v2/assets', headers=headers)
-print(response.json())
+print(response.json()['data'])

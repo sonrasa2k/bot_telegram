@@ -21,6 +21,7 @@ class Get_Coin:
     def get_all(self):
         api_url = 'http://api.coincap.io/v2/assets'
         data = requests.get(api_url,self.headers).json()['data']
+        print(data)
         list_name = []
         list_gia = []
         list_gia_thap = []

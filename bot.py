@@ -7,7 +7,7 @@ from get_coin import Get_Coin
 
 tiktoks = Download()
 covic = Covic()
-coin = Get_Coin
+coin = Get_Coin()
 updater = Updater(token='1947192196:AAFEPEaVg9RnJP0ELjbTZUujN3rGkYUHLQA', use_context=True) #Replace TOKEN with your token string
 dispatcher = updater.dispatcher
 def help(update,context):
