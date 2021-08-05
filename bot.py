@@ -113,7 +113,7 @@ def play_music(update, context):
             # text_return = text_return + str(tiktoks.downloadVideoNoWatermarkByID(data[stt].strip(),"son"))
             # context.bot.send_message(chat_id=update.effective_chat.id, text=text_return)
             url_video = tiktoks.downloadVideoNoWatermarkByID(data[stt].strip().split('||')[0],"son2")
-
+            print(url_video)
             caption = "Video ID: {0}\n Caption: {1}\n Lượt view: {2}\n Tác giả: {3}\n".format(
                 data[stt].strip().split('||')[0],data[stt].strip().split('||')[1],data[stt].strip().split('||')[3],data[stt].strip().split('||')[2]
             )
