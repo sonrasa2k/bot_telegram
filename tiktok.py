@@ -205,8 +205,8 @@ class Download:
             "minCursor": 0,
             "maxCursor": max_cursor,
             "shareUid": "",
-            "lang": "vi-VN",
-            "verifyFp": "",
+            "language": "vi-VN",
+            "verifyFp": "verify_kmw96uek_8lofr5Vk_1WgP_4VT1_8qhK_F7weuL2RdECF",
             "region": "VN",
             "app_language":"vi-VN",
             "browser_language":"vi"
