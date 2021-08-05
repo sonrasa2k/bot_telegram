@@ -208,7 +208,8 @@ class Download:
             "lang": "vi-VN",
             "verifyFp": "",
             "region": "VN",
-            "app_language":"vi-VN"
+            "app_language":"vi-VN",
+            "browser_language":"vi"
         }
         try:
             url = self.BASE_URL + 'video/feed'
