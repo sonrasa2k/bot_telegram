@@ -205,7 +205,7 @@ class Download:
             "minCursor": 0,
             "maxCursor": max_cursor,
             "shareUid": "",
-            "lang": "",
+            "lang": "vi-VN",
             "verifyFp": "",
         }
         try:

@@ -91,12 +91,12 @@ def play_music(update, context):
                     text_return = text_return + str(i) + " | " + str(list_caption[i]) + "\n"
                 context.bot.send_message(chat_id=update.effective_chat.id, text=text_return)
                 f.close()
-    elif ".v " in text:
+    elif "/v " in text:
         with open(str(name)+".txt","r",encoding="utf-8") as f:
             data = f.readlines()
         f.close()
         stt = -2
-        text = text.split('.v ')[1]
+        text = text.split('/v ')[1]
         if text == "r":
             stt = randrange(0,len(data))
         try:
@@ -118,8 +118,8 @@ def play_music(update, context):
                 data[stt].strip().split('||')[0],data[stt].strip().split('||')[1],data[stt].strip().split('||')[3],data[stt].strip().split('||')[2]
             )
             context.bot.sendVideo(chat_id=update.effective_chat.id,video=url_video,caption=caption)
-    elif "lấy" in text and "video" in text:
-        text = text.split('lấy ')[1].split(' video')[0]
+    elif "/lấy" in text and "video" in text:
+        text = text.split('/lấy ')[1].split(' video')[0]
         try:
             so_video = int(text)
             if so_video > 28:
@@ -139,8 +139,8 @@ def play_music(update, context):
             )
             context.bot.sendVideo(chat_id=update.effective_chat.id, video=url_video, caption=caption)
 
-    elif "coin" in text:
-        text = text.split('coin ')[1]
+    elif "/coin" in text:
+        text = text.split('/coin ')[1]
         if text == "all":
             text_return = coin.get_all()
             context.bot.send_message(chat_id=update.effective_chat.id, text=text_return)
