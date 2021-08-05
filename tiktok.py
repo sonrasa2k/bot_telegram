@@ -195,10 +195,57 @@ class Download:
             list_play.append(data['itemInfos']['playCount'])
         return list_id,list_caption,list_nick,list_play
 
+    #get trending tiktok
+    def getTrendingFeed(self, max_cursor=0, cookies={}):
+        param = {
+            "type": 5,
+            "secUid": "",
+            "id": '',
+            "count": 30,
+            "minCursor": 0,
+            "maxCursor": max_cursor,
+            "shareUid": "",
+            "lang": "",
+            "verifyFp": "",
+        }
+        try:
+            url = self.BASE_URL + 'video/feed'
+            res = requests.get(
+                url,
+                params=param,
+                headers={
+                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                    "authority": "www.tiktok.com",
+                    "Accept-Encoding": "gzip, deflate",
+                    "Connection": "keep-alive",
+                    "Host": "www.tiktok.com",
+                    "User-Agent": "Mozilla/5.0  (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/86.0.170 Chrome/80.0.3987.170 Safari/537.36",
+                },
+                cookies=cookies
+            )
 
+            resp = res.json()
+            return resp['body'], res.cookies.get_dict()
+        except Exception:
+            print(traceback.format_exc())
+            return False
+    def get_all_id_video_from_trending(self):
+        list_id = []
+        list_caption = []
+        list_nick = []
+        list_play = []
+        data = self.getTrendingFeed()[0]
+        data_raw = data["itemListData"]
+        for data in data_raw:
+            list_id.append(data['itemInfos']['id'])
+            list_caption.append(data['itemInfos']['text'])
+            list_nick.append(data['authorInfos']['nickName'])
+            list_play.append(data['itemInfos']['playCount'])
+        return list_id, list_caption, list_nick, list_play
 
 if __name__ == '__main__':
     new = Download()
-    print(new.downloadVideoNoWatermarkByID('6985558522410847514'),"son")
+    print(new.get_all_id_video_from_trending())
+
     # for id in list_id:
     #     print(new.downloadVideoNoWatermarkByID(id,"son"))

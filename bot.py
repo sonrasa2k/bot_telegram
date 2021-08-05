@@ -91,12 +91,12 @@ def play_music(update, context):
                     text_return = text_return + str(i) + " | " + str(list_caption[i]) + "\n"
                 context.bot.send_message(chat_id=update.effective_chat.id, text=text_return)
                 f.close()
-    elif "/v " in text:
+    elif ".v " in text:
         with open(str(name)+".txt","r",encoding="utf-8") as f:
             data = f.readlines()
         f.close()
         stt = -2
-        text = text.split('/v ')[1]
+        text = text.split('.v ')[1]
         if text == "r":
             stt = randrange(0,len(data))
         try:
@@ -118,14 +118,54 @@ def play_music(update, context):
                 data[stt].strip().split('||')[0],data[stt].strip().split('||')[1],data[stt].strip().split('||')[3],data[stt].strip().split('||')[2]
             )
             context.bot.sendVideo(chat_id=update.effective_chat.id,video=url_video,caption=caption)
-    elif "/coin" in text:
-        text = text.split('/coin ')[1]
+    elif "lấy" in text and "video" in text:
+        text = text.split('lấy ')[1].split(' video')[0]
+        try:
+            so_video = int(text)
+            if so_video > 28:
+                context.bot.send_message(chat_id=update.effective_chat.id,
+                                 text="Bạn đã nhập sai số video cần lấy từ list! Hãy nhập /list để kiểm tra lại!")
+                return False
+        except:
+            context.bot.send_message(chat_id=update.effective_chat.id,text = "Bạn nhập cú pháp không chính xác! Cú Pháp : Lấy X video. VD: lấy 5 video\n")
+            return False
+        with open(str(name)+".txt","r",encoding="utf-8") as f:
+            data = f.readlines()
+        for i in range(0,so_video):
+            url_video = tiktoks.downloadVideoNoWatermarkByID(data[i].strip().split('||')[0], "son2")
+            caption = "Video ID: {0}\n Caption: {1}\n Lượt view: {2}\n Tác giả: {3}\n".format(
+                data[i].strip().split('||')[0], data[i].strip().split('||')[1], data[i].strip().split('||')[3],
+                data[i].strip().split('||')[2]
+            )
+            context.bot.sendVideo(chat_id=update.effective_chat.id, video=url_video, caption=caption)
+
+    elif "coin" in text:
+        text = text.split('coin ')[1]
         if text == "all":
             text_return = coin.get_all()
             context.bot.send_message(chat_id=update.effective_chat.id, text=text_return)
         else:
             text_return = coin.get_by_name(text)
             context.bot.send_message(chat_id=update.effective_chat.id, text=text_return)
+    elif text == "tiktok trend" or text == "Tiktok trend":
+        try:
+            list_id, list_caption, list_nick, list_play = tiktoks.get_all_id_video_from_trending()
+        except:
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Có Lỗi Khi Get Data . Sorry!")
+        with open(str(name) + ".txt", "w", encoding="utf-8") as f:
+            text_return = "Danh Sách Các ID Trên TikTok Trending"+":\n" + "STT | Caption:\n "
+            for i in range(0, int(len(list_id)/2)):
+                f.writelines(str(list_id[i]) + "||" + str(list_caption[i]) + "||" + str(list_nick[i]) + "||" + str(
+                    list_play[i]) + "\n")
+                text_return = text_return + str(i) + " | " + str(list_caption[i]) + "\n"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text_return)
+            text_return = ""
+            for i in range(int(len(list_id)/2),len(list_id)):
+                text_return = text_return + str(i) + " | " + str(list_caption[i]) + "\n"
+                f.writelines(str(list_id[i]) + "||" + str(list_caption[i]) + "||" + str(list_nick[i]) + "||" + str(
+                    list_play[i]) + "\n")
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text_return)
+            f.close()
         # try:
         #     list_id = tiktoks.get_all_id_video__of_user(text)
         #     if len(list_id) == 0:
