@@ -147,7 +147,7 @@ def play_music(update, context):
         else:
             text_return = coin.get_by_name(text)
             context.bot.send_message(chat_id=update.effective_chat.id, text=text_return)
-    elif text == "tiktok trend" or text == "Tiktok trend":
+    elif text == "/tiktok trend" or text == "/Tiktok trend":
         try:
             list_id, list_caption, list_nick, list_play = tiktoks.get_all_id_video_from_trending()
         except:
