@@ -210,7 +210,8 @@ class Download:
             "region": "VN",
             "app_language":"vi-VN",
             "browser_language":"vi",
-            "priority_region":"VN"
+            "priority_region":"VN",
+            "device_id":6906584401044538882,
         }
         try:
             url = self.BASE_URL + 'video/feed'
