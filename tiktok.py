@@ -207,6 +207,7 @@ class Download:
             "shareUid": "",
             "lang": "vi-VN",
             "verifyFp": "",
+            "region": "VN"
         }
         try:
             url = self.BASE_URL + 'video/feed'
