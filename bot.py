@@ -182,9 +182,12 @@ def play_music(update, context):
         # except:
         #     text_return = "Loi He Thong!"
         #     context.bot.send_message(chat_id=update.effective_chat.id, text=text_return)
-
-
-
+    elif "/so" in text:
+        so1 = randrange(0,10)
+        so = randrange(10000,99999)
+        so_result = str(so1)+str(so)
+        context.bot.send_message(chat_id=update.effective_chat.id,text = "Số May Mắn Của Bạn Hôm Nay LÀ : ")
+        context.bot.send_message(chat_id=update.effective_chat.id, text=so_result)
 
 
 def summary(update, context):
