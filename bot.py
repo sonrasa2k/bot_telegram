@@ -4,10 +4,12 @@ import requests
 from tiktok import Download
 from random import randrange
 from get_coin import Get_Coin
-
+from sogiday import SoGiDay
+from datetime import datetime
 tiktoks = Download()
 covic = Covic()
 coin = Get_Coin()
+so = SoGiDay()
 updater = Updater(token='1947192196:AAFEPEaVg9RnJP0ELjbTZUujN3rGkYUHLQA', use_context=True) #Replace TOKEN with your token string
 dispatcher = updater.dispatcher
 def help(update,context):
@@ -36,6 +38,8 @@ def tin_ca_nhiem_moi(update,context):
     else:
         text = data['content']
         context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+
+
 
 def play_music(update, context):
     name = update.message.from_user.id
@@ -182,13 +186,21 @@ def play_music(update, context):
         # except:
         #     text_return = "Loi He Thong!"
         #     context.bot.send_message(chat_id=update.effective_chat.id, text=text_return)
-    elif "/so" in text:
+    elif text == "/so":
         so1 = randrange(0,10)
         so = randrange(10000,99999)
         so_result = str(so1)+str(so)
         context.bot.send_message(chat_id=update.effective_chat.id,text = "Số May Mắn Của Bạn Hôm Nay LÀ : ")
         context.bot.send_message(chat_id=update.effective_chat.id, text=so_result)
 
+def so_gi_day(bot,update,job_queue):
+    chat_id = update.effective_chat.id
+    bot.send_message(chat_id=chat_id,text="Bạn đã đăng ký nhận thông báo số gì đây Shopee thành công!")
+    t = datetime.time(8,57,00,000000)
+    job_queue.run_daily(send_sogiday(chatid=chat_id,gio=9),t,context=update)
+
+def send_sogiday(bot,job,chatid,gio):
+    bot.send_message(chat_id=chatid, text = "Số gì đây : "+so.ket_qua_hientai(gio))
 
 def summary(update, context):
     datavn = covic.covic_vn()
@@ -207,10 +219,12 @@ help_r = CommandHandler('help',help)
 dispatcher.add_handler(help_r)
 tin_nhanh = CommandHandler('covic_new',tin_ca_nhiem_moi)
 dispatcher.add_handler(tin_nhanh)
+updater.dispatcher.add_handler(CommandHandler('sogiday', so_gi_day,pass_job_queue=True))
 start = tin_nhanh = CommandHandler('start',help)
 dispatcher.add_handler(start)
 # hello_handler = MessageHandler(Filters.text, hello)
 # dispatcher.add_handler(hello_handler)
 play_handler = MessageHandler(Filters.text, play_music)
 dispatcher.add_handler(play_handler)
+
 updater.start_polling()
