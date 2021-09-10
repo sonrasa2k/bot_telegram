@@ -64,7 +64,7 @@ def play_music(update, context):
                 data = covic.covic_diaphuong("all")
                 for i in range(0, len(data)):
                     text = text + "{0} | {1} | {2} | {3}\n".format(data[i]["name"], data[i]["cases"],
-                                                                   data[i]["casesToday"], data['death'][i])
+                                                                   data[i]["casesToday"], data[i]['death'])
                     context.bot.send_message(chat_id=update.effective_chat.id, text=text)
             except:
                 context.bot.send_message(chat_id=update.effective_chat.id, text="Hệ thống đang bị lỗi rồi bạn yêu ♥")
