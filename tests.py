@@ -1,4 +1,3 @@
-text = "son dep trai"
+import os
 
-tach = text.split(" dep ")
-print(tach)
+print(os.listdir())

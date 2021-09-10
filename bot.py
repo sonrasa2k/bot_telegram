@@ -60,27 +60,23 @@ def play_music(update, context):
     elif '/covic' in text:
         text = text.split('/covic ')[1]
         if "all" in text:
-            data = covic.covic_diaphuong("all")
-            if data['code'] == 0:
+            try:
+                data = covic.covic_diaphuong("all")
+                for i in range(0, len(data)):
+                    text = text + "{0} | {1} | {2} | {3}\n".format(data[i]["name"], data[i]["cases"],
+                                                                   data[i]["casesToday"], data['death'][i])
+                    context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            except:
                 context.bot.send_message(chat_id=update.effective_chat.id, text="Hệ thống đang bị lỗi rồi bạn yêu ♥")
-            elif data['code'] == 99:
-                text = "Tên Tỉnh |Tổng |Hôm Nay | CHẾT\n"
-                for i in range(0, len(data['name_tinh'])):
-                    text = text + "{0} | {1} | {2} | {3}\n".format(data['name_tinh'][i], data['scn'][i],
-                                                                   data['scnhn'][i], data['chet'][i])
-                context.bot.send_message(chat_id=update.effective_chat.id, text=text)
         else:
-            print(text)
             data = covic.covic_diaphuong(text)
-            print(data)
-            if data['code'] == 0:
-                context.bot.send_message(chat_id=update.effective_chat.id, text="Hệ thống đang bị lỗi rồi bạn yêu ♥")
-            elif data['code'] == 200:
-                text = "Thông tinh về Covic Tại {0}:\nTổng Số Ca Nhiễm: {1}\nSố Ca Nhiễm Hôm Nay: {2}\nSố Người Chết: {3}".format(
-                    data['name_tinh'], data['scn'], data['scnhn'], data['chet'])
-                context.bot.send_message(chat_id=update.effective_chat.id, text=text)
-            else:
+            if data["name"] == "00":
                 context.bot.send_message(chat_id=update.effective_chat.id, text="Tên tĩnh sai rồi bạn yêu ♥")
+                return False
+            text = "Thông tinh về Covic Tại {0}:\nTổng Số Ca Nhiễm: {1}\nSố Ca Nhiễm Hôm Nay: {2}\nSố Người Chết: {3}".format(
+                    data['name'], data['cases'], data['casesToday'], data['death'])
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+
     elif "/tiktok username" in text:
         text = text.split('/tiktok username ')[1]
         list_id,list_caption,list_nick,list_play = tiktoks.get_all_id_video__of_user(text)
@@ -208,10 +204,13 @@ def summary(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id,text="Hệ thống đang bị lỗi rồi bạn yêu ♥")
     else:
         text = "THÔNG TIN COVIC TẠI VIỆT NAM :\n" \
-               "Số ca nhiễm: {0}\n" \
-               "Số ca đang điều trị: {1}\n" \
-               "Số ca đã khỏi bệnh: {2}\n" \
-               "Số người chết: {3}\n".format(datavn['scn'],datavn['scdt'],datavn['khoi'],datavn['chet'])
+               "Tổng Số ca nhiễm: {0}\n" \
+               " Tổng Số ca đang điều trị: {1}\n" \
+               "Tổng Số ca đã khỏi bệnh: {2}\n" \
+               " Tổng Số người chết: {3}\n" \
+               "Số Ca Nhiễm Hôm Nay: {4}\n" \
+               "Số Ca Đã Khỏi Bệnh Hôm Nay: {5}\n" \
+               "Số Ca Tử Vong Hôm Nay: {6} ".format(datavn['scn'],datavn['scdt'],datavn['khoi'],datavn['chet'],datavn["scn_today"],datavn["khoi_today"],datavn["chet_today"])
         context.bot.send_message(chat_id=update.effective_chat.id,text=text)
 corona_summary_handler = CommandHandler('covicvn', summary)
 dispatcher.add_handler(corona_summary_handler)

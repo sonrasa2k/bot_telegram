@@ -37,5 +37,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\sonng\bot_telegram\+84947425294.session</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="+84774197322" uuid="ebdaf847-4f73-4b93-97e3-5be2ab398585">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\sonng\bot_telegram\+84774197322.session</jdbc-url>
+    </data-source>
   </component>
 </project>
