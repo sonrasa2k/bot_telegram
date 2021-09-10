@@ -62,10 +62,12 @@ def play_music(update, context):
         if "all" in text:
             try:
                 data = covic.covic_diaphuong("all")
+                text = "Thông Tin Covid Tất Cả Tỉnh Thành Việt Nam\n" \
+                       "Tên Tỉnh | Tổng Số Ca| Số Ca Hôm Nay | Số Người Chết\n"
                 for i in range(0, len(data)):
                     text = text + "{0} | {1} | {2} | {3}\n".format(data[i]["name"], data[i]["cases"],
                                                                    data[i]["casesToday"], data[i]['death'])
-                    context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+                context.bot.send_message(chat_id=update.effective_chat.id, text=text)
             except:
                 context.bot.send_message(chat_id=update.effective_chat.id, text="Hệ thống đang bị lỗi rồi bạn yêu ♥")
         else:
