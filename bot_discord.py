@@ -3,7 +3,12 @@ from discord.ext import commands
 import requests
 
 client = discord.Client()
+@client.event
+async def on_ready():
+    print("Bot is ready")
+@client.event
 async def on_message(message):
+    print(message.content)
     if message.author == client.user:
         return
     data = {
@@ -11,6 +16,6 @@ async def on_message(message):
         "message": str(message.content)
     }
     kq = requests.post('https://sonbot2021.herokuapp.com/webhooks/rest/webhook',json=data).json()
+    print(kq)
     await message.channel.send(kq[0]["text"])
-if __name__ == '__main__':
-    client.run('ODg3MDEyMDMwMTIzNDkxMzc4.YT98Uw.36AOKT-8zehTUBL10YOz8NhY2ZM')
+client.run('ODg4NzYwNDg3NjQxMjI3MjY0.YUXYtA.UDQhvE4SgWvQTc4WL9wC4gSv-Co')
