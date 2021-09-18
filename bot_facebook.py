@@ -8,7 +8,7 @@ from sendVideo import sendVideo
 guivideo = sendVideo()
 tiktoks = Download()
 app = Flask(__name__)
-ACCESS_TOKEN = 'EAADCmt8dSl0BAPEuQzVv0WZBgqPCpRwp7S6sP9ZBRVnhz4QYEY4FNzLDBisJ6ZCyoUtSGvBqouZBx0GgeBu1eLl2pietZAJz245RSF2HxoJmDUhrZAviu6zdoBBzcb57fO1MfVAtioqYzjAZB9QM9VuJ7HyblsLWA7hGZCllb3etpXHez5o8dOaAHkxRt8YkqZADUjOHB2LGJSQZDZD'
+ACCESS_TOKEN = 'EAADCmt8dSl0BAD6cl1ckus2UZBJwh4vMYlUXOc4ZAeEL2RvsMpwrUbhlfCg2LHbeZAsUnabZAmfajMZAIaOGDUeYaaxtH6QEVYDKMQ9DczcguafOGj5Gb1TvZB9dBhCt8QqwxS7R5roZBGP7LXCp7qf9EUJbRUts9pjXZBUsT5RISeleYZC2nFju4W2zUksfOa9Eg2FADAJlN4QZDZD'
 VERIFY_TOKEN = 'hongtin123456@@@'
 bot = Bot(ACCESS_TOKEN)
 
@@ -31,6 +31,7 @@ def receive_message():
                 print(message)
                 #Facebook Messenger ID for user so we know where to send response back to
                 recipient_id = message['sender']['id']
+                print(recipient_id)
                 if message['message'].get('text'):
                     text = message['message'].get('text')
                     if "tiktok" in text:

@@ -201,7 +201,7 @@ class APP2(tk.Tk):
         self.code = tk.StringVar()
         self.code = ttk.Entry(self.body,
                                    textvariable=self.code,
-                                   width=60)
+                                       width=60)
         self.code.grid(column=1, row=0, sticky=tk.EW)
         self.download_login = ttk.Button(self.body, text='Lấy API')
         self.download_login['command'] = self.get_apied
