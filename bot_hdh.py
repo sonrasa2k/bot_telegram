@@ -11,8 +11,6 @@ for i in data:
     list_chuc_nang.append(i.split(':')[1])
 
 
-
-
 @client.event
 async def on_ready():
     print("Bot is ready")

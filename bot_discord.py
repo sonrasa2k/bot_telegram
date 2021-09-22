@@ -18,4 +18,4 @@ async def on_message(message):
     kq = requests.post('https://sonbot2021.herokuapp.com/webhooks/rest/webhook',json=data).json()
     print(kq)
     await message.channel.send(kq[0]["text"])
-client.run('ODg4NzYwNDg3NjQxMjI3MjY0.YUXYtA.UDQhvE4SgWvQTc4WL9wC4gSv-Co')
+client.run('ODg3MDEyMDMwMTIzNDkxMzc4.YT98Uw.CYTreroUs-ct3OUCywk2AMDri0Y')
